@@ -4,9 +4,9 @@ game.resources = [
 	 * @example
 	 * {name: "example", type:"image", src: "data/img/example.png"},
 	 */
+        //{name: "background image", type:"image", src: "data/img/game_over.png"},
         {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
         {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
-       // {name: "player", type:"image", src: "data/img/Larry.png"},
         {name: "player", type:"image", src: "data/img/custom-charactor.png"},
         {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
         {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
