@@ -16,9 +16,10 @@ game.playerEntity = me.Entity.extend({
         this.health = game.data.playerHealth;
         this.lastHit = this.now;
         this.dead = false;
-        this.body.setVelocity(game.data.moveSpeed, 15);
+        this.body.setVelocity(game.data.playerMoveSpeed, 15);
         //keeps track on what direction my player is facing
         this.facing = "right";
+        this.attack = game.playerAttack;
         this.lastAttack = new Date().getTime();
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
@@ -40,6 +41,7 @@ game.playerEntity = me.Entity.extend({
             //this line says to unflip the animation when going right
             this.facing = "right";
             this.flipX(true);
+        
         } else if (me.input.isKeyPressed("left")) {
             this.facing = "left";
             //this line says to unflip the animation when going right
@@ -66,25 +68,13 @@ game.playerEntity = me.Entity.extend({
                 this.body.jumping = true;
                 // play some audio 
                 me.audio.play("jump");
-            } else if (me.input.isKeyPressed('jump')) {
-                if (!this.body.jumping && !this.body.falling) {
-                    // set current vel to the maximum defined value
-                    // gravity will then do the rest
-                    this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-                    // set the jumping flag
-                    this.body.jumping = true;
-                    // play some audio 
-                    me.audio.play("jump");
-                }
             }
-        }
+        } 
         //these are my controlles for my player
         //me.collision.check(this, true, this.collideHandler.bind(this), true);
         //this is the position between mario and whatever he hits or lands on 
 
         if (me.input.isKeyPressed("attack")) {
-
-            console.log("attack1");
             if (!this.renderable.isCurrentAnimation("attack")) {
 
                 console.log("attack2");
@@ -129,9 +119,8 @@ game.playerEntity = me.Entity.extend({
                 this.body.vel.x = 0;
                 //this.pos.x = this.pos.x + 1;
             }
-            console.log(this.now + " " + this.lastHit);
+//            console.log(this.now + " " + this.lastHit);
             if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
-                console.log("tower hit");
                 this.lastHit = this.now;
                 response.b.loseHealth(game.data.playerAttack);
             }
@@ -156,6 +145,13 @@ game.playerEntity = me.Entity.extend({
                    (((xdif>0 ) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
                    ){
                 this.lastHit = this.now;
+                //the creeps health is less than our attack ecucate code in if statement
+                    if(response.b.health<= game.data.playerAttack) {
+                       //adds one gold for a creep kill
+                        game.data.gold += 1;
+                        console.log("Current Gold:" + game.data.gold);
+                    }
+                
                 response.b.loseHealth(game.data.playerAttack);
             }
         }
@@ -216,7 +212,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 }
             }]);
         this.broken = false;
-        this.health = game.data.enemyBasehealth;
+        this.health = game.data.enemyBaseHealth;
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
 
@@ -237,8 +233,9 @@ game.EnemyBaseEntity = me.Entity.extend({
     onCollision: function() {
 
     },
-    loseHealth: function() {
-        this.health--;
+    loseHealth: function(damage) {
+        console.log(this.health);
+        this.health = this.health - damage;
     }
 });
 
@@ -295,7 +292,6 @@ game.EnemyCreep = me.Entity.extend({
         return true;
     },
     collideHandler: function(response) {
-        console.log(this.health);
         if (response.b.type === 'PlayerBase') {
             this.attacking = true;
 
