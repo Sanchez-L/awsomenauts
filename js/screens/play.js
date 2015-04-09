@@ -8,9 +8,6 @@ game.PlayScreen = me.ScreenObject.extend({
         //loads my map
         me.levelDirector.loadLevel("map1");
         //pulls my player from entities
-        var player = me.pool.pull("player", 0, 420, {});
-        //places my player on my world
-        me.game.world.addChild(player, 5);
 
         this.resetPlayer(0, 420);
 

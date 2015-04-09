@@ -6,12 +6,12 @@ var game = {
 	data : {
 		// score
 		score : 0,
-                enemyBaseHealth: 10,
-                playerBaseHealth: 10,
-                enemyCreepHealth: 10,
-                playerHealth: 10,
-                enemyCreepAttack: 20,
-                playerAttack: 1,
+                enemyBaseHealth: 50,
+                playerBaseHealth: 50,
+                enemyCreepHealth: 30,
+                playerHealth: 30,
+                enemyCreepAttack: 5,
+                playerAttack: 5,
                 playerAttackTimer: 1000,
                 enemyCreepAttackTimer: 1000,
                 playerMoveSpeed: 5,
