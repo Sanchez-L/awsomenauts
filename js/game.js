@@ -6,23 +6,43 @@ var game = {
 	data : {
 		// score
 		score : 0,
+                //global variable for enemy base heath
                 enemyBaseHealth: 50,
+                //globalvariable for player base health
                 playerBaseHealth: 50,
-                enemyCreepHealth: 30,
+                //global variable for enemy creep health
+                eneyCreepHealth: 30,
+                //global variable for player health
                 playerHealth: 30,
+                //global variable for enemy creep attack
                 enemyCreepAttack: 5,
+                //global variable for player attack
                 playerAttack: 5,
+                //global variable for player attack timer
                 playerAttackTimer: 1000,
+                //global variable for enemy creep attack timer
                 enemyCreepAttackTimer: 1000,
+                //global variable for playermove speed
                 playerMoveSpeed: 5,
+                //global variable for creep move speed
                 creepMoveSpeed: 5,
-                gameManager: "",
+                //global variable for game timer manager
+                gameTimerManager: "",
+                //global variable for hero death manager
+                HeroDeathManager: "",
+                //global variable for player
                 player: "",
+                //global variable for exp
                 exp: 0,
+                //global variable for gold
                 gold: 0,
+                //global variable for exp1
                 exp1: 0,
+                //global variable for exp2
                 exp2: 0,
+                //global variable for exp3
                 exp3: 0,
+                //global variable for exp4
                 exp4: 0
                 
                         
@@ -59,11 +79,18 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
+                //this line reisters my player
                 me.pool.register("player", game.playerEntity, true);
+                //this line registers my player base
                 me.pool.register("PlayerBase", game.PlayerBaseEntity);
+                //this line registers my enemy base
                 me.pool.register("EnemyBase", game.EnemyBaseEntity);
+                //this line registers my enemy creep
                 me.pool.register("EnemyCreep", game.EnemyCreep, true);
-                me.pool.register("GameManager", game.GameManager);
+                //this line registers my game timer manager
+                me.pool.register("GameTimerManager", game.GameTimerManager);
+                ///this line registers my hero death manager
+                me.pool.register("HeroDeathManager", game.HeroDeathManager);
                 
                 //sets the screen to title
 		me.state.set(me.state.MENU, new game.TitleScreen());

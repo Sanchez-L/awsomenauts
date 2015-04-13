@@ -1,4 +1,4 @@
-game.GameManager = Object.extend({
+game.GameTimerManager = Object.extend({
     init: function(x, y, settings) {
         this.now = new Date().getTime();
         this.lastCreep = new Date().getTime();
@@ -26,4 +26,18 @@ game.GameManager = Object.extend({
         }
         return true;
     }
+});
+
+
+game.HeroDeathManager = Object.extend({
+    init: function(x, y, settings) {
+        this.alwaysUpdate = true;
+    },
+    
+     update: function() {
+         if (game.data.player.dead) {
+            me.game.world.removeChild(game.data.player);
+            me.state.current().resetPlayer(10, 0);
+        }
+     }
 });

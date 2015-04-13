@@ -1,8 +1,8 @@
 //sets the size of my player and show up on screen
 game.playerEntity = me.Entity.extend({
     init: function(x, y, settings) {
-        this.setSuper();
-        this.setPlayerTimers();
+        this.setSuper(x, y);
+        this.setPlayerTimer();
         this.setAttributes();
         this.setFlags();
         this.type = "PlayerEntity";
@@ -15,7 +15,7 @@ game.playerEntity = me.Entity.extend({
 
     },
     //it sets the super class
-    setSuper: function() {
+    setSuper: function(x, y) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "player",
                 width: 64,
@@ -55,15 +55,15 @@ game.playerEntity = me.Entity.extend({
     
     update: function(delta) {
         this.now = new Date().getTime();
-        this.dead = checkIfDead();      
+        this.dead = this.checkIfDead();
         this.checkKeyPressedAndMove();
         this.setAnimations();
         me.collision.check(this, true, this.collideHandler.bind(this), true);
-
         this.body.update(delta);
         this._super(me.Entity, "update", [delta]);
         return true;
     },
+    
     checkIfDead: function() {
         if (this.health <= 0) {
             return true;
@@ -72,7 +72,7 @@ game.playerEntity = me.Entity.extend({
     },
     
     checkKeyPressedAndMove: function() {
-         //check if right button is pressed
+        //check if right button is pressed
         if (me.input.isKeyPressed("right")) {
             this.body.vel.x += this.body.accel.x * me.timer.tick;
             //this line says to unflip the animation when going right
@@ -97,7 +97,7 @@ game.playerEntity = me.Entity.extend({
         }
     },
     
-    setAnimation: function() {
+    setAnimations: function() {
         if (me.input.isKeyPressed("attack")) {
             if (!this.renderable.isCurrentAnimation("attack")) {
 
@@ -123,60 +123,74 @@ game.playerEntity = me.Entity.extend({
     },
     
     collideHandler: function(response) {
-        //console.log(response.b.type);
         if (response.b.type === 'EnemyBaseEntity') {
-            var ydif = this.pos.y - response.b.pos.y;
-            var xdif = this.pos.x - response.b.pos.x;
-
-            if (ydif < -40 && xdif < 70 && xdif > -35) {
-                this.body.falling = false;
-                this.body.vel.y = -1;
-            }
-            else if (xdif > -35 && this.facing === 'right' && (xdif < 0)) {
-                this.body.vel.x = 0;
-                //this.pos.x = this.pos.x - 1;
-            } else if (xdif < 70 && this.facing === 'left' && (xdif > 0)) {
-                this.body.vel.x = 0;
-                //this.pos.x = this.pos.x + 1;
-            }
-//            console.log(this.now + " " + this.lastHit);
-            if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
-                this.lastHit = this.now;
-                response.b.loseHealth(game.data.playerAttack);
-            }
+            this.collideWithEnemyBase(response);
         } else if (response.b.type === 'EnemyCreep') {
-            var xdif = this.pos.x - response.b.pos.x;
-            var ydif = this.pos.y - response.b.pos.y;
+            this.collideWithEnemyCreep(response);
+        }
 
-            if (xdif > 0) {
-                //this.pos.x = this.pos.x + 1;
-                if (this.facing === "left") {
-                    this.body.vel.x = 0;
-                }
-            } else {
-                //this.pos.x = this.pos.x - 1;
-                if (this.facing === "right") {
-                    this.body.vel.x = 0;
-                }
+    },
+    
+    collideWithEnemyBase: function(response) {
+        var ydif = this.pos.y - response.b.pos.y;
+        var xdif = this.pos.x - response.b.pos.x;
+
+        if (ydif < -40 && xdif < 70 && xdif > -35) {
+            this.body.falling = false;
+            this.body.vel.y = -1;
+        }
+        else if (xdif > -35 && this.facing === 'right' && (xdif < 0)) {
+            this.body.vel.x = 0;
+        } else if (xdif < 70 && this.facing === 'left' && (xdif > 0)) {
+            this.body.vel.x = 0;
+        }
+        if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
+            this.lastHit = this.now;
+            response.b.loseHealth(game.data.playerAttack);
+        }
+    },
+    
+    collideWithEnemyCreep: function(response) {
+        var xdif = this.pos.x - response.b.pos.x;
+        var ydif = this.pos.y - response.b.pos.y;
+
+        this.stopMovement(xdif);
+
+        if (this.checkAttack(xdif, ydif)) {
+            this.hitCreep(response);
+        };
+    },
+    
+    stopMovement: function(xdif) {
+        if (xdif > 0) {
+            if (this.facing === "left") {
+                this.body.vel.x = 0;
             }
-
-            if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttack
-                    && (Math.abs(ydif) <= 40) &&
-                    (((xdif > 0) && this.facing === "left") || ((xdif < 0) && this.facing === "right"))
-                    ) {
-                this.lastHit = this.now;
-                //the creeps health is less than our attack ecucate code in if statement
-                if (response.b.health <= game.data.playerAttack) {
-                    //adds one gold for a creep kill
-                    game.data.gold += 1;
-                    console.log("Current Gold:" + game.data.gold);
-                }
-
-                response.b.loseHealth(game.data.playerAttack);
+        } else {
+            if (this.facing === "right") {
+                this.body.vel.x = 0;
             }
         }
+    },
+    
+    checkAttack: function(xdif, ydif) {
+        if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttack
+                && (Math.abs(ydif) <= 40) &&
+                (((xdif > 0) && this.facing === "left") || ((xdif < 0) && this.facing === "right"))
+                ) {
+            this.lastHit = this.now;
+            //the creeps health is less than our attack ecucate code in if statement
+            return true;
+        }
+        return false;
+    },
+
+    hitCreep: function(response) {
+        if (response.b.health <= game.data.playerAttack) {
+                //adds one gold for a creep kill
+                game.data.gold += 1;
+                console.log("Current Gold:" + game.data.gold);
+            }
+            response.b.loseHealth(game.data.playerAttack);
     }
 });
-
-
-
