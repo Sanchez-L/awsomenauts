@@ -11,9 +11,9 @@ var game = {
                 //globalvariable for player base health
                 playerBaseHealth: 50,
                 //global variable for enemy creep health
-                eneyCreepHealth: 30,
+                enemyCreepHealth: 30,
                 //global variable for player health
-                playerHealth: 30,
+                playerHealth: 100,
                 //global variable for enemy creep attack
                 enemyCreepAttack: 5,
                 //global variable for player attack

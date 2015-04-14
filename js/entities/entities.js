@@ -47,7 +47,7 @@ game.playerEntity = me.Entity.extend({
     },
     
     addAnimation: function() {
-        this.renderable.addAnimation("idle", [39]);
+        this.renderable.addAnimation("idle", [27]);
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 159);
         this.renderable.setCurrentAnimation("idle");
         this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
@@ -174,7 +174,7 @@ game.playerEntity = me.Entity.extend({
     },
     
     checkAttack: function(xdif, ydif) {
-        if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttack
+        if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer
                 && (Math.abs(ydif) <= 40) &&
                 (((xdif > 0) && this.facing === "left") || ((xdif < 0) && this.facing === "right"))
                 ) {

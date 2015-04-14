@@ -26,6 +26,9 @@
    </properties>
   </tile>
  </tileset>
+ <imagelayer name="image">
+  <image source="../img/sponge.png"/>
+ </imagelayer>
  <objectgroup name="Base Entity">
   <object name="EnemyBase" x="910.666" y="421.333" width="70.6667" height="137.333"/>
   <object x="165.333" y="484" width="2.66667"/>
