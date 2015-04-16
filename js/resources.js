@@ -10,8 +10,8 @@ game.resources = [
         {name: "player", type:"image", src: "data/img/custom-charactor.png"},
         {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
         {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
-        {name: "title-screen", type:"image", src: "data/img/title.png"},
-        {name: "image2", type:"image", src: "data/img/image2.png"},
+        {name: "title-screen", type:"image", src: "data/img/halo-world.jpg"},
+        {name: "black-sea", type:"image", src: "data/img/black-sea.jpg"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},

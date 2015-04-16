@@ -10,7 +10,7 @@ game.TitleScreen = me.ScreenObject.extend({
         me.game.world.addChild(new (me.Renderable.extend({
             init: function() {
                 this._super(me.Renderable, 'init', [510, 30, me.game.viewport.width, me.game.viewport.height]);
-                this.font = new me.Font("Ariel", 46, "white");
+                this.font = new me.Font("Ariel", 46, "blue");
             },
             draw: function(renderer) {
                 this.font.draw(renderer.getContext(), "Awesomenauts!!", 350, 130);
