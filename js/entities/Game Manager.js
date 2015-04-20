@@ -7,37 +7,62 @@ game.GameTimerManager = Object.extend({
     },
     update: function() {
         this.now = new Date().getTime();
-        if (game.data.player.dead) {
-            
-            me.game.world.removeChild(game.data.player);
-            me.state.current().resetPlayer(10, 0);
-        }
+        this.goldTimerCheck();
+        this.creepTimerCheck();
+        this.playerRespawnCheck();
 
+        return true;
+    },
+    goldTimerCheck: function() {
         if (Math.round(this.now / 1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)) {
             game.data.gold += 1;
             console.log("CurrentGold: " + game.data.gold);
         }
+    },
+    
+    playerRspawnCheck: function() {
+        if (game.data.player.dead) {
 
+            me.game.world.removeChild(game.data.player);
+            me.state.current().resetPlayer(10, 0);
+        }
+    },
+    
+    creepTimerCheck: function() {
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             this.lastCreep = this.now;
             var creepe = me.pool.pull("EnemyCreep", 5000, 0, {});
             me.game.world.addChild(creepe, 5);
+        }
+    }
+});
 
+game.heroDeathManager = Object.extend({
+    init: function(x, y, settings) {
+        this.alwaysUpdate = true;
+    },
+    update: function() {
+        if (game.data.player.dead) {
+            me.game.world.removeChild(game.data.player);
+            me.state.current().resetPlayer(10, 0);
         }
         return true;
     }
 });
 
-
-game.HeroDeathManager = Object.extend({
+game.ExperienceManager = Object.extend({
     init: function(x, y, settings) {
-        this.alwaysUpdate = true;
+        this.always = true;
     },
     
-     update: function() {
-         if (game.data.player.dead) {
-            me.game.world.removeChild(game.data.player);
-            me.state.current().resetPlayer(10, 0);
+    update: function() {
+        if(game.data.win === true){
+            gme.data.exp += 10;
+        }else if(game.data.win === false) {
+             game.data.exp += 1;
         }
-     }
+        
+        return true;
+    }
 });
+

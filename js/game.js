@@ -29,7 +29,7 @@ var game = {
                 //global variable for game timer manager
                 gameTimerManager: "",
                 //global variable for hero death manager
-                HeroDeathManager: "",
+                heroDeathManager: "",
                 //global variable for player
                 player: "",
                 //global variable for exp
@@ -43,7 +43,9 @@ var game = {
                 //global variable for exp3
                 exp3: 0,
                 //global variable for exp4
-                exp4: 0
+                exp4: 0,
+                //global variable for win
+                win: ""
                 
                         
 	},
@@ -91,6 +93,8 @@ var game = {
                 me.pool.register("GameTimerManager", game.GameTimerManager);
                 ///this line registers my hero death manager
                 me.pool.register("HeroDeathManager", game.HeroDeathManager);
+                //this line registers my expierance manager 
+                me.pool.register("ExpieranceManager", game.ExpieranceManager);
                 
                 //sets the screen to title
 		me.state.set(me.state.MENU, new game.TitleScreen());
