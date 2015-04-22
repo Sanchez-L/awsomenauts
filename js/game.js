@@ -68,6 +68,9 @@ var game = {
         
         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
+        console.log(game.data.exp);
+        console.log(game.data.exp2);
+
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
 
@@ -96,8 +99,8 @@ var game = {
                 ///this line registers my hero death manager
                 me.pool.register("HeroDeathManager", game.HeroDeathManager);
                 //this line registers my expierance manager 
-                me.pool.register("ExpieranceManager", game.ExpieranceManager);
-                
+                me.pool.register("ExperienceManager", game.experienceManager);
+                                
                 //sets the screen to title
 		me.state.set(me.state.MENU, new game.TitleScreen());
                 //sets the screen in play mode

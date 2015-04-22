@@ -20,7 +20,7 @@ game.GameTimerManager = Object.extend({
         }
     },
     
-    playerRspawnCheck: function() {
+    playerRespawnCheck: function() {
         if (game.data.player.dead) {
 
             me.game.world.removeChild(game.data.player);
@@ -31,13 +31,13 @@ game.GameTimerManager = Object.extend({
     creepTimerCheck: function() {
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 5000, 0, {});
+            var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
             me.game.world.addChild(creepe, 5);
         }
     }
 });
 
-game.heroDeathManager = Object.extend({
+game.HeroDeathManager = Object.extend({
     init: function(x, y, settings) {
         this.alwaysUpdate = true;
     },
@@ -50,7 +50,7 @@ game.heroDeathManager = Object.extend({
     }
 });
 
-game.ExperienceManager = Object.extend({
+game.experienceManager = Object.extend({
     init: function(x, y, settings) {
         this.always = true;
         this.gameOver = false;
@@ -59,7 +59,7 @@ game.ExperienceManager = Object.extend({
     update: function() {
         if(game.data.win === true && !this.gameOver){
             this.gameOver(true);
-        }else if(game.data.win === false && !this.gameOver) {
+        }else if(game.data.win === false && !this.gameover) {
             this.gameOver(false);
         }
         console.log(game.data.exp);
@@ -77,6 +77,8 @@ game.ExperienceManager = Object.extend({
         game.data.exp += 10;
         this.gameOver = false;
          me.save.exp = game.data.exp;
+         //for testing purpose only
+         me.save.exp2 = 4;
     }
 });
 

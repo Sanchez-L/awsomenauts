@@ -26,7 +26,7 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer name="image2" x="-21" y="-9">
+ <imagelayer name="image2" x="-6" y="-242">
   <image source="../img/black-sea.jpg"/>
  </imagelayer>
  <objectgroup name="Base Entity" opacity="0.84">
