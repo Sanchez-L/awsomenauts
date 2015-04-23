@@ -31,7 +31,7 @@ game.GameTimerManager = Object.extend({
     creepTimerCheck: function() {
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+            var creepe = me.pool.pull("EnemyCreep", 2488, 910, {});
             me.game.world.addChild(creepe, 5);
         }
     }
@@ -57,7 +57,7 @@ game.experienceManager = Object.extend({
     },
     
     update: function() {
-        if(game.data.win === true && !this.gameOver){
+        if(game.data.win === true && !this.gameover){
             this.gameOver(true);
         }else if(game.data.win === false && !this.gameover) {
             this.gameOver(false);
@@ -75,7 +75,7 @@ game.experienceManager = Object.extend({
         }
         
         game.data.exp += 10;
-        this.gameOver = false;
+        this.gameover = true;
          me.save.exp = game.data.exp;
          //for testing purpose only
          me.save.exp2 = 4;
