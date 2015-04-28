@@ -4,10 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/entities/entities.js</file>
+            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/screens/title.js</file>
             <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/game.js</file>
             <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/screens/play.js</file>
+            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/entities/Game%20Manager.js</file>
+            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/entities/Enemy%20Creep.js</file>
             <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/resources.js</file>
-            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/index.php</file>
+            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/entities/Enemy%20Base.js</file>
+            <file>file:/C:/xampp/htdocs/Sanchez_L-Awesomnauts/js/screens/SpendExp.js</file>
         </group>
     </open-files>
 </project-private>

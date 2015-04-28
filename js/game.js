@@ -45,7 +45,11 @@ var game = {
                 //global variable for exp4
                 exp4: 0,
                 //global variable for win
-                win: ""
+                win: "",
+                
+                pausePos: "",
+                
+                buyscreen: ""
                 
                         
 	},
@@ -102,7 +106,8 @@ var game = {
                 me.pool.register("HeroDeathManager", game.HeroDeathManager);
                 //this line registers my expierance manager 
                 me.pool.register("ExperienceManager", game.experienceManager);
-                                
+                //sets the spend gold manager  
+                me.pool.register("SpendGold", game.SpendGold);
                 //sets the screen to title
 		me.state.set(me.state.MENU, new game.TitleScreen());
                 //sets the screen in play mode

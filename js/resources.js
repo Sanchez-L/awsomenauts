@@ -13,6 +13,7 @@ game.resources = [
         {name: "title-screen", type:"image", src: "data/img/halo-world.jpg"},
         {name: "black-sea", type:"image", src: "data/img/black-sea.jpg"},
 	{name: "exp-screens", type:"image", src: "data/img/spendExp.jpg"},
+        {name: "gold-screen", type:"image", src: "data/img/spendGold.jpg"},
     /* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},

@@ -10,6 +10,7 @@ game.SpendExp = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.F3, "F3");
         me.input.bindKey(me.input.KEY.F4, "F4");
         me.input.bindKey(me.input.KEY.F5, "F5");
+        var exp1cost = ((game.data.exp1 + 1) * 10);
 
         me.game.world.addChild(new (me.Renderable.extend({
             init: function() {
@@ -17,9 +18,9 @@ game.SpendExp = me.ScreenObject.extend({
                 this.font = new me.Font("Ariel", 26, "blue");
             },
             draw: function(renderer) {
-                this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY OR F5 TO SKIP", this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "PRES F1--F4 TO BUY OR F5 TO SKIP", this.pos.x, this.pos.y);
                 this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x + 800, this.pos.y +0);
-                this.font.draw(renderer.getContext(), "F1: INCREASE GOLD PRODUCTION CURRENT LEVEL 1 "  + game.data.exp.toString() + "COST" + ((game.data.exp1 + 1) * 10), this.pos.x, this.pos.y + 50);
+                this.font.draw(renderer.getContext(), "F1: INCREASE GOLD PRODUCTION CURRENT LEVEL 1 "  + game.data.exp.toString() + "COST" + exp1cost, this.pos.x, this.pos.y + 50);
                 this.font.draw(renderer.getContext(), "F2:ADD STARTING GOLD 1 ", this.pos.x, this.pos.y +100);
                 this.font.draw(renderer.getContext(), "F3:INCREASE ATTACK DAMAGE 1 ", this.pos.x, this.pos.y +150);
                 this.font.draw(renderer.getContext(), "F4: INCREASE STARTING HEALTH 1 ", this.pos.x, this.pos.y +200);
@@ -28,7 +29,13 @@ game.SpendExp = me.ScreenObject.extend({
         
         this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){
             if(action === "F1"){
-                
+                if(game.data.exp >= exp1cost){
+                    game.data.exp += 1;
+                    game.data.exp -= exp1cost;
+                    me.state.change(me.state.PLAY);
+                }else{
+                    console.log("not enough expierence");
+                }
             }else if(action === "F2"){
                 
             }else if(action === "F3"){
