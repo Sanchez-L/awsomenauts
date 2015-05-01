@@ -36,6 +36,18 @@ var game = {
                 exp: 0,
                 //global variable for gold
                 gold: 0,
+                //global variable for abiity1
+                ability1: 0,
+                //global variable for abiity2
+                ability2: 0,
+                //global variable for abiity3
+                ability3: 0,
+                //global variable for skill
+                skill1: 0,
+                //global variable for skill2
+                skill2: 0,
+                //global variable for skill3
+                skill3: 0,
                 //global variable for exp1
                 exp1: 0,
                 //global variable for exp2
@@ -46,10 +58,12 @@ var game = {
                 exp4: 0,
                 //global variable for win
                 win: "",
-                
+                //global variable for pause 
                 pausePos: "",
-                
-                buyscreen: ""
+                 //global variable for buy screen
+                buyscreen: "",
+                 //global variable for buy text
+                buyText: ""
                 
                         
 	},
@@ -70,9 +84,10 @@ var game = {
 		});
 	}
         
-        me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
         me.state.SPENDEXP = 112;
+        me.state.NEW= 113;
+        me.state.LOAD = 114;
 
         console.log(game.data.exp);
         console.log(game.data.exp2);
@@ -114,6 +129,10 @@ var game = {
 		me.state.set(me.state.PLAY, new game.PlayScreen());
                 //sets the screen to spend mode
                 me.state.set(me.state.SPENDEXP, new game.SpendExp());
+                //sets the screen to load mode
+                me.state.set(me.state.LOAD, new game.LoadProfile());
+                //sets the screen to new mode
+                me.state.set(me.state.NEW, new game.NewProfile());
 		// Starts the game.
 		me.state.change(me.state.MENU);
 	}

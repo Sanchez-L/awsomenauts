@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>melonJS Template</title>
+		<title>Sanchez_L-Awesomenauts</title>
+                <link rel="stylesheet" type="text/css" media="screen" href="index.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="index.css">
 		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,6 +17,23 @@
 		<!-- Canvas placeholder -->
 		<div id="screen"></div>
 
+                <form id="input" method="post">
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type='text' name='username' id='username' autocomplete='off'>
+                    </div>
+                    
+                    <div class='password'>
+                        <label for='password'>Password</label>
+                        <input type='text' name='password' id='password'>
+                    </div>
+                
+                    <button type='button' id='register'>Register</button>
+                    <button type='button' id='load'>Load</button>
+                    <button type='button' id='mainmenu'>Main Menu</button>
+                </form>
+                
+                
 		<!-- melonJS Library -->
 		<!-- build:js js/app.min.js -->
 		<script type="text/javascript" src="lib/melonJS-1.1.0-min.js"></script>
@@ -28,16 +46,20 @@
 		<script type="text/javascript" src="js/resources.js"></script>
 
 		<script type="text/javascript" src="js/entities/entities.js"></script>
-                <script type="text/javascript" src="js/entities/Enemy Base.js"></script>
-                <script type="text/javascript" src="js/entities/Game Manager.js"></script>
-                <script type="text/javascript" src="js/entities/Enemy Creep.js"></script>
-                <script type="text/javascript" src="js/entities/Player Base.js"></script>
+                <script type="text/javascript" src="js/entities/EnemyBase.js"></script>
+                <script type="text/javascript" src="js/GameManagers/SpendGold.js"></script>
+                <script type="text/javascript" src="js/GameManagers/GameTimerManager.js"></script>
+                <script type="text/javascript" src="js/GameManagers/ExperienceManager.js"></script>
+                <script type="text/javascript" src="js/GameManagers/HeroDeathManager.js"></script>
+                <script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
+                <script type="text/javascript" src="js/entities/PlayerBase.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
-
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
                 <script type="text/javascript" src="js/screens/SpendExp.js"></script>
-		<!-- /build -->
+		<script type="text/javascript" src="js/screens/NewProfile.js"></script>
+                <script type="text/javascript" src="js/screens/LoadProfile.js"></script>
+                <!-- /build -->
 		<!-- Bootstrap & Mobile optimization tricks -->
 		<script type="text/javascript">
 			window.onReady(function onReady() {
