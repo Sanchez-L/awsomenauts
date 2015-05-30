@@ -21,7 +21,7 @@ game.GameTimerManager = Object.extend({
     },
     playerRespawnCheck: function() {
         if (game.data.player.dead) {
-
+            this.
             me.game.world.removeChild(game.data.player);
             me.state.current().resetPlayer(70, 770);
         }
